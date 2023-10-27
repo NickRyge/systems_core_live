@@ -23,6 +23,7 @@ local name
 local yellowlights
 local yellow
 
+-- Sets all lights to the specified value
 local function setAll(val)
     for i = 1,sectionAmount,1 do
         electrics.values[nameString..i] = val
@@ -44,11 +45,17 @@ end
 -- Init
 local function init(jbeamData)
     -- load jbeam data
+
+    -- specifies the name that the electrics values will have, extended by a number.
     nameString = jbeamData.nameString or "DRL"
-    speedModifier = jbeamData.timerSpeed or 0.025
+
+    -- Specifies the amount of sections to account for
     sectionAmount = jbeamData.sections or 4
+    -- Specifies the speedmodifier
     speedModifier = jbeamData.speedMod or 10
+    -- Overrides the brakelights - This is necessary in an electric vehicle because the brake lights are always on when stationary. 
     override = jbeamData.override or false
+    -- Specifies the value that the lights should finish at. Can be 0 for off, 0.5 for on, or 1 for on_intense.
     finalValue = jbeamData.finalValue or 0.5
 
     --DEBUG
